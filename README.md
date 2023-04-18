@@ -1,7 +1,7 @@
 # deeplearning
 cifar10 with pytorch
 
- ## *Read dataset and create data loaders*
+ #### *Read dataset and create data loaders*
  Importing the cifar10 dataset and separating it into the train and test datasets. During training and testing, the
 DataLoader class is used to load data in batches. The training and testing sets are subjected to two separate
 sets of data transformations. Data augmentation methods such as random cropping, horizontal flipping, colour
@@ -19,7 +19,7 @@ image size is around 40*40 pixel image with reflection of the image.
 ● tt.to Tensor transforms an image into a tensor.
 ● tt.Normalize normalises the image data defined in the stats variable.
  
- ## *Creating a Model*
+ #### *Creating a Model*
  On the CIFAR-10 dataset, this code creates a convolutional neural network (CNN) for Image categorization. The
 network is made up of six Cifar_Block modules, which are followed by a fully linked layer. Each Cifar_Block
 module has a set of 3 convolutional layers with batch normalisation and ReLU activation, followed by a
@@ -35,7 +35,7 @@ average pooling over the output of the previous Cifar_Block, which is followed b
 features and ReLU activation. Dropout is applied to the ReLU layer's output, and a forward linear layer with 10
 output features (one for each class in CIFAR-10) and softmax activation is defined.
 
-## *Creating the loss and optimizer*
+#### *Creating the loss and optimizer*
 
 The loss function utilised in the training phase is F.cross_entropy. This is a loss function that combines the
 softmax and negative log-likelihood loss functions. It is widely used for multi-class problems with a single correct
@@ -84,3 +84,26 @@ epoch are saved in a list named history, which the function returns at the end.
 The %time magic command is used to calculate the amount of time it takes the fit_one_cycle() function to train
 the model. Before the function call, the history list is initialised and updated with the outcomes of each epoch
 
+**The curves for the evolution of loss**
+
+![image](https://user-images.githubusercontent.com/98383338/232902706-744490a0-a1d1-42ac-895b-7fe4f7afc62f.png)
+Both the training and validation losses appear to diminish with time at first. However, if you train the model for an
+extended period of time, you will find that the training loss continues to drop while the validation loss stops
+reducing and even begins to grow beyond after 30 epochs. So, the model is overfitting
+**The curves for the evolution of training and validation (test) accuracies**
+![image](https://user-images.githubusercontent.com/98383338/232902838-b9ef11ec-d747-43b9-b6b5-e039c6da6fda.png)
+The model achieved a validation accuracy of 92%, and based on the graph, it is unlikely that the model would
+achieve an accuracy greater than 93% even after training for a longer period of time. This indicates that the
+model needs to be fine-tuned by tweaking the hyperparameters or use more techniques.
+![image](https://user-images.githubusercontent.com/98383338/232902930-c01f247b-9437-4f20-af9c-1f8c27303c9f.png)
+
+The learning rate begins extremely low and steadily grows for 30% of the iterations to a maximum of 0.001.
+**final model accuracy on cifar-10 Validation Set:**
+![image](https://user-images.githubusercontent.com/98383338/232903057-f9c0add4-6e88-416e-bd26-317ec4f4ea77.png)
+Overall, The model performed well on the CIFAR-10 dataset, with a training accuracy of 98% and a validation
+accuracy of 92%. The implementation of strategies such as weight decay, gradient clipping, and one-cycle
+learning rate has most certainly assisted the model in achieving high validation accuracy while keeping high
+training accuracy. The disparity in training and validation accuracy, on the other hand, shows that the model may
+be overfitting the training data..While 92% validation accuracy is a decent result, there may be potential for
+improvement. This might be accomplished by fine-tuning the model architecture, modifying the hyperparameters,
+or supplementing the training data.
