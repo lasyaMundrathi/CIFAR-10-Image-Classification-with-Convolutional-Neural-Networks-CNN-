@@ -1,4 +1,4 @@
-# deeplearning
+# CIFAR-10 Image Classification with Convolutional Neural Networks (CNN)
 cifar10 with pytorch
 
  #### *Read dataset and create data loaders*
